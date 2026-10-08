@@ -47,7 +47,6 @@ PlateCanvas(
 - [`niger_plate`](https://pub.dev/packages/niger-plate) - Niger's licence plates.
 - [`palestine_plate`](https://pub.dev/packages/palestine-plate) - Palestine's licence plates.
 - [`republic_of_ireland_plate`](https://pub.dev/packages/republic-of-ireland-plate) - Republic of Ireland's licence plates.
-- [`saudi_arabia_plate`](https://pub.dev/packages/saudi-arabia-plate) - Saudi Arabia's licence plates.
 - [`sudan_plate`](https://pub.dev/packages/sudan-plate) - Sudan's licence plates.
 - [`tunisia_plate`](https://pub.dev/packages/tunisia-plate) - Tunisia's licence plates.
 - [`venezuela_plate`](https://pub.dev/packages/venezuela-plate) - Venezuela's licence plates.
