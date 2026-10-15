@@ -23,18 +23,28 @@ void main() {
     await loader.load();
   });
 
-  /// category id -> (spec, theme, space-separated sample value)
+  /// category id -> (spec, theme, space-separated sample value, one per field)
   final Map<String, (PlateSpec, PlateTheme, String)> cases =
       <String, (PlateSpec, PlateTheme, String)>{
         'standard': (
           RepublicOfIrelandPlates.standard,
           RepublicOfIrelandThemes.standard,
-          '2 5 2 D 2 3 4 5 6',
+          '252 D 23456',
         ),
         'electric': (
           RepublicOfIrelandPlates.electric,
           RepublicOfIrelandThemes.standard,
-          '2 5 2 D 2 3 4 5 6',
+          '252 D 23456',
+        ),
+        'clare_short_serial': (
+          RepublicOfIrelandPlates.standardFor('CE'),
+          RepublicOfIrelandThemes.standard,
+          '241 CE 6',
+        ),
+        'six_digit_serial': (
+          RepublicOfIrelandPlates.standard,
+          RepublicOfIrelandThemes.standard,
+          '131 W 123456',
         ),
       };
 
@@ -75,4 +85,19 @@ void main() {
       controller.dispose();
     });
   }
+
+  test('fields are one slot each and complete at their minimum', () {
+    final PlateSpec spec = RepublicOfIrelandPlates.standardFor('CE');
+    expect(spec.slots.map((PlateSlot s) => s.length), <int>[3, 2, 6]);
+    expect(spec.slots.map((PlateSlot s) => s.minLength), <int>[3, 1, 1]);
+    PlateController c = PlateController.fromValues(spec, ['241', 'C', '6']);
+    expect(c.isCompleted, isTrue);
+    c.dispose();
+    c = PlateController.fromValues(spec, ['241', 'C', null]);
+    expect(c.isCompleted, isFalse);
+    c.dispose();
+    c = PlateController.fromValues(spec, ['24', 'CE', '6']);
+    expect(c.isCompleted, isFalse);
+    c.dispose();
+  });
 }

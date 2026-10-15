@@ -6,7 +6,7 @@ import 'package:plate_core/plate_core.dart';
 /// sequence number. Reports, never bars a keystroke.
 ///
 /// The article allows a sequence of one to six digits (six on re-registered
-/// imports); the specs lay out five.
+/// imports); the serial field takes the same range.
 class RepublicOfIrelandValidator extends GatedPlateValidator {
   const RepublicOfIrelandValidator();
 

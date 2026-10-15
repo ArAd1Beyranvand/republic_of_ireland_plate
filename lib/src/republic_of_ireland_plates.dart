@@ -51,8 +51,9 @@ abstract final class _Layout {
 ///
 /// [standard] and [electric] are Dublin's; [standardFor] and [electricFor] take
 /// any county code from [RepublicOfIrelandAlphabets.countyNames], which fixes
-/// both the caption and whether the code takes one slot or two. Groups `year`,
-/// `county`, `serial`. Both pair with [RepublicOfIrelandThemes.standard].
+/// the caption; the county field itself holds one or two letters and the
+/// serial one to six digits. Groups `year`, `county`, `serial`. Both pair with
+/// [RepublicOfIrelandThemes.standard].
 ///
 /// [electric] is the optional green strip at the right edge, from July 2025.
 /// Not implemented: the square-plate variant (green under the euroband), the
@@ -75,15 +76,11 @@ abstract final class RepublicOfIrelandPlates {
     if (caption == null) {
       throw ArgumentError.value(county, 'county', 'Not a county code');
     }
-    final int letters = county.length;
-
-    // Cell centres, in reading order, then squeezed so the number still ends at
-    // lastCx when the county takes two letters.
+    // Cell centres, in reading order, squeezed so the number still ends at
+    // lastCx: three year digits, the two-letter county field, five serial cells.
     final List<double> raw = <double>[0, _Layout.pitch, 2 * _Layout.pitch];
     raw.add(raw.last + _Layout.toHyphen + _Layout.fromHyphen);
-    for (int i = 1; i < letters; i++) {
-      raw.add(raw.last + _Layout.pitch);
-    }
+    raw.add(raw.last + _Layout.pitch);
     raw.add(raw.last + _Layout.toHyphen + _Layout.toNumber);
     for (int i = 1; i < 5; i++) {
       raw.add(raw.last + _Layout.pitch);
@@ -93,16 +90,23 @@ abstract final class RepublicOfIrelandPlates {
       for (final double r in raw) _Layout.firstCx + r * scale,
     ];
     final double pitch = _Layout.pitch * scale;
-    final int countyAt = 3, serialAt = 3 + letters;
 
-    PlateSlot slot(PlateAlphabet a, double c) => PlateSlot(
+    PlateSlot field(
+      PlateAlphabet a,
+      double firstCx,
+      int cells,
+      int length, {
+      int? minLength,
+    }) => PlateSlot(
       alphabet: a,
       box: PlateBox(
-        c - pitch / 2,
+        firstCx - pitch / 2,
         _Layout.serialCy - _Layout.serialBox / 2,
-        pitch,
+        cells * pitch,
         _Layout.serialBox,
       ),
+      length: length,
+      minLength: minLength,
     );
 
     PlateRule hyphen(double c) => PlateRule(
@@ -138,16 +142,19 @@ abstract final class RepublicOfIrelandPlates {
           ),
       ]),
       slots: <PlateSlot>[
-        for (int i = 0; i < 3; i++)
-          slot(RepublicOfIrelandAlphabets.digits, cx[i]),
-        for (int i = 0; i < letters; i++)
-          slot(RepublicOfIrelandAlphabets.countyLetters, cx[countyAt + i]),
-        for (int i = 0; i < 5; i++)
-          slot(RepublicOfIrelandAlphabets.digits, cx[serialAt + i]),
+        field(RepublicOfIrelandAlphabets.digits, cx[0], 3, 3),
+        field(
+          RepublicOfIrelandAlphabets.countyLetters,
+          cx[3],
+          2,
+          2,
+          minLength: 1,
+        ),
+        field(RepublicOfIrelandAlphabets.digits, cx[5], 5, 6, minLength: 1),
       ],
       rules: <PlateRule>[
         hyphen((cx[2] + cx[3]) / 2),
-        hyphen((cx[serialAt - 1] + cx[serialAt]) / 2),
+        hyphen((cx[4] + cx[5]) / 2),
       ],
       labels: <PlateLabel>[
         PlateLabel(
@@ -172,14 +179,10 @@ abstract final class RepublicOfIrelandPlates {
           color: RepublicOfIrelandColors.white,
         ),
       ],
-      textGroups: <PlateTextGroup>[
-        const PlateTextGroup(<int>[0, 1, 2], key: 'year'),
-        PlateTextGroup(<int>[
-          for (int i = 0; i < letters; i++) countyAt + i,
-        ], key: 'county'),
-        PlateTextGroup(<int>[
-          for (int i = 0; i < 5; i++) serialAt + i,
-        ], key: 'serial'),
+      textGroups: const <PlateTextGroup>[
+        PlateTextGroup(<int>[0], key: 'year'),
+        PlateTextGroup(<int>[1], key: 'county'),
+        PlateTextGroup(<int>[2], key: 'serial'),
       ],
     );
   }
