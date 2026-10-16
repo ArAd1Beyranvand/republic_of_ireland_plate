@@ -13,9 +13,6 @@ abstract final class RepublicOfIrelandCountry {
     panelColor: RepublicOfIrelandColors.blue,
     panelTextColor: RepublicOfIrelandColors.white,
     flagAspectRatio: 46 / 70.4,
-    flag: SvgPlateAsset(
-      'assets/flags/Flag_of_Europe.svg',
-      package: 'plate_core',
-    ),
+    flag: EuropeanStars.band,
   );
 }
