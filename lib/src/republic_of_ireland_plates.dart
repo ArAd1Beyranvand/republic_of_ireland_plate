@@ -5,10 +5,10 @@ import 'package:plate_core/plate_core.dart';
 import 'republic_of_ireland_colors.dart';
 import 'republic_of_ireland_country.dart';
 
-/// Where the ink sits, in plate units. Measured off the flattened references
-/// (`Ireland_license_plate__EV_`, `Revised_format_Republic_of_Ireland_numberplate__2013-_`),
-/// both normalised to the 520×110 mm the article gives (4 px per unit, and a
-/// 1-unit margin around the frame that is left in).
+/// Plate units measured off the flattened references
+/// (`Ireland_license_plate__EV_`,
+/// `Revised_format_Republic_of_Ireland_numberplate__2013-_`) normalised to
+/// 520×110 (4 px per unit, with a 1-unit margin around the frame left in).
 ///
 /// Serial row: ink y 27.8–96.0 (68.2 tall, centre 61.9). Cells of `252-D-23456`
 /// are centred 71.4, 114.0, 156.6 | hyphen 190.0 | 223.5 | hyphen 257.0 |
@@ -55,12 +55,10 @@ abstract final class _Layout {
 /// serial one to six digits. Groups `year`, `county`, `serial`. Both pair with
 /// [RepublicOfIrelandThemes.standard].
 ///
-/// [electric] is the optional green strip at the right edge, from July 2025.
-/// Not implemented: the square-plate variant (green under the euroband), the
-/// ZZ temporary, diplomatic, trade and historic plates, for which no reference
-/// was measured, and the 1987–2012 `YY-CC-NNNNNN` format. The red plate in the
-/// photo set is not Irish and is not used. The article names no Israel-specific
-/// value.
+/// [electric] adds the optional green strip at the right edge, from July 2025.
+/// Not implemented, for lack of a measured reference: the square-plate variant
+/// (green under the euroband), the ZZ temporary, diplomatic, trade and historic
+/// plates, and the 1987–2012 `YY-CC-NNNNNN` format.
 abstract final class RepublicOfIrelandPlates {
   static final PlateSpec standard = standardFor('D');
   static final PlateSpec electric = electricFor('D');

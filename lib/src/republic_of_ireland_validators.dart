@@ -5,8 +5,7 @@ import 'package:plate_core/plate_core.dart';
 /// the first half of 2013), a county code from the article's tables, and the
 /// sequence number. Reports, never bars a keystroke.
 ///
-/// The article allows a sequence of one to six digits (six on re-registered
-/// imports); the serial field takes the same range.
+/// The sequence is one to six digits (six on re-registered imports).
 class RepublicOfIrelandValidator extends GatedPlateValidator {
   const RepublicOfIrelandValidator();
 

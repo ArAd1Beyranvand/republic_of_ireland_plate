@@ -2,11 +2,9 @@ import 'package:plate_core/plate_core.dart';
 
 import 'republic_of_ireland_colors.dart';
 
-/// Ireland as a `PlateCountry`: the EU band. The twelve stars are drawn into
-/// the shared asset `plate_core` ships; the
-/// `IRL` beneath them is a [PlateLabel] on each spec, so it can be placed
-/// where it was measured, and [captionLines] is left empty to avoid printing it
-/// twice.
+/// The EU band. The `IRL` beneath the stars is a [PlateLabel] on each spec so
+/// it sits where it was measured, and [captionLines] is empty to avoid
+/// printing it twice.
 abstract final class RepublicOfIrelandCountry {
   // ignore: constant_identifier_names
   static const PlateCountry republic_of_ireland = PlateCountry(
