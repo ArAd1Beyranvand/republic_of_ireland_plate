@@ -12,6 +12,8 @@ class RepublicOfIrelandValidator extends GatedPlateValidator {
   @override
   String get gateGroup => 'serial';
 
+  static final RegExp _year = RegExp(r'^\d\d[12]$');
+
   static const String reasonYear =
       'The year is two digits and a half-year, 1 or 2.';
   static const String reasonCounty = 'That is not a county code.';
@@ -19,7 +21,7 @@ class RepublicOfIrelandValidator extends GatedPlateValidator {
 
   @override
   PlateValidation judge(PlateEntry entry) {
-    if (!RegExp(r'^\d\d[12]$').hasMatch(entry.group('year'))) {
+    if (!_year.hasMatch(entry.group('year'))) {
       return const PlateValidation.invalid(reasonYear);
     }
     if (!RepublicOfIrelandAlphabets.countyNames.containsKey(
