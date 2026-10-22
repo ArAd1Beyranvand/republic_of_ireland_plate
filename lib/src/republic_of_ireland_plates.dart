@@ -84,28 +84,21 @@ abstract final class RepublicOfIrelandPlates {
       raw.add(raw.last + _Layout.pitch);
     }
     final double scale = (_Layout.lastCx - _Layout.firstCx) / raw.last;
-    final List<double> cx = <double>[
-      for (final double r in raw) _Layout.firstCx + r * scale,
-    ];
+    final List<double> cx = <double>[for (final double r in raw) _Layout.firstCx + r * scale];
     final double pitch = _Layout.pitch * scale;
 
-    PlateSlot field(
-      PlateAlphabet a,
-      double firstCx,
-      int cells,
-      int length, {
-      int? minLength,
-    }) => PlateSlot(
-      alphabet: a,
-      box: PlateBox(
-        firstCx - pitch / 2,
-        _Layout.serialCy - _Layout.serialBox / 2,
-        cells * pitch,
-        _Layout.serialBox,
-      ),
-      length: length,
-      minLength: minLength,
-    );
+    PlateSlot field(PlateAlphabet a, double firstCx, int cells, int length, {int? minLength}) =>
+        PlateSlot(
+          alphabet: a,
+          box: PlateBox(
+            firstCx - pitch / 2,
+            _Layout.serialCy - _Layout.serialBox / 2,
+            cells * pitch,
+            _Layout.serialBox,
+          ),
+          length: length,
+          minLength: minLength,
+        );
 
     PlateRule hyphen(double c) => PlateRule(
       box: PlateBox(
@@ -124,36 +117,19 @@ abstract final class RepublicOfIrelandPlates {
       country: RepublicOfIrelandCountry.republic_of_ireland,
       canvasWidth: _Layout.width,
       canvasHeight: _Layout.height,
-      panel: const PlatePanel(
-        box: PlateBox(0, 0, _Layout.bandEnd, 70.4),
-        padding: EdgeInsets.zero,
-      ),
+      panel: const PlatePanel(box: PlateBox(0, 0, _Layout.bandEnd, 70.4), padding: EdgeInsets.zero),
       background: PlateSection.columns(<PlatePart>[
-        const PlatePart(
-          PlateSection.fill(PlateFill.panel),
-          end: _Layout.bandEnd,
-        ),
+        const PlatePart(PlateSection.fill(PlateFill.panel), end: _Layout.bandEnd),
         PlatePart(PlateSection.plain, end: electric ? fieldEnd : null),
         if (electric)
-          const PlatePart(
-            PlateSection.fill(PlateFill.color(RepublicOfIrelandColors.green)),
-          ),
+          const PlatePart(PlateSection.fill(PlateFill.color(RepublicOfIrelandColors.green))),
       ]),
       slots: <PlateSlot>[
         field(RepublicOfIrelandAlphabets.digits, cx[0], 3, 3),
-        field(
-          RepublicOfIrelandAlphabets.countyLetters,
-          cx[3],
-          2,
-          2,
-          minLength: 1,
-        ),
+        field(RepublicOfIrelandAlphabets.countyLetters, cx[3], 2, 2, minLength: 1),
         field(RepublicOfIrelandAlphabets.digits, cx[5], 5, 6, minLength: 1),
       ],
-      rules: <PlateRule>[
-        hyphen((cx[2] + cx[3]) / 2),
-        hyphen((cx[4] + cx[5]) / 2),
-      ],
+      rules: <PlateRule>[hyphen((cx[2] + cx[3]) / 2), hyphen((cx[4] + cx[5]) / 2)],
       labels: <PlateLabel>[
         PlateLabel(
           text: caption,
@@ -167,12 +143,7 @@ abstract final class RepublicOfIrelandPlates {
         ),
         const PlateLabel(
           text: 'IRL',
-          box: PlateBox(
-            _Layout.irlLeft,
-            _Layout.irlTop,
-            _Layout.irlWidth,
-            _Layout.irlHeight,
-          ),
+          box: PlateBox(_Layout.irlLeft, _Layout.irlTop, _Layout.irlWidth, _Layout.irlHeight),
           glyphHeight: _Layout.irlGlyph,
           color: RepublicOfIrelandColors.white,
         ),
