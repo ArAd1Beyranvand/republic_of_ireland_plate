@@ -1,5 +1,5 @@
 name: republic_of_ireland_plate
-description: "Republic of Ireland's licence plates for the plate_core library: the standard white plate and the green-strip electric plate, with the EU band and Irish county names, black on white, an advisory validator."
+description: "Republic of Ireland's licence plates for plate_core: the standard white plate and the green-strip electric plate, with the EU band and Irish county names, and more."
 version: 0.1.0
 repository: https://github.com/ArAd1Beyranvand/republic_of_ireland_plate
 resolution: workspace
