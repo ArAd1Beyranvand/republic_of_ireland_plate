@@ -29,7 +29,7 @@ void main() {
     'standard': (RepublicOfIrelandPlates.standard, RepublicOfIrelandThemes.standard, '252 D 23456'),
     'electric': (RepublicOfIrelandPlates.electric, RepublicOfIrelandThemes.standard, '252 D 23456'),
     'clare_short_serial': (
-      RepublicOfIrelandPlates.standardFor('CE'),
+      RepublicOfIrelandPlates.standard,
       RepublicOfIrelandThemes.standard,
       '241 CE 6',
     ),
@@ -72,7 +72,7 @@ void main() {
   }
 
   test('fields are one slot each and complete at their minimum', () {
-    final PlateSpec spec = RepublicOfIrelandPlates.standardFor('CE');
+    final PlateSpec spec = RepublicOfIrelandPlates.standard;
     expect(spec.slots.map((PlateSlot s) => s.length), <int>[3, 2, 6]);
     expect(spec.slots.map((PlateSlot s) => s.minLength), <int>[3, 1, 1]);
     PlateController c = PlateController.fromValues(spec, ['241', 'C', '6']);

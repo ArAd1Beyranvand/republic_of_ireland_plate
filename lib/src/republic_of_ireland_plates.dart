@@ -49,10 +49,9 @@ abstract final class _Layout {
 /// The Irish plate, `YYH-CC-NNNNN`, with the Irish-language county name above
 /// the number and the EU band at the left.
 ///
-/// [standard] and [electric] are Dublin's; [standardFor] and [electricFor] take
-/// any county code from [RepublicOfIrelandAlphabets.countyNames], which fixes
-/// the caption; the county field itself holds one or two letters and the
-/// serial one to six digits. Groups `year`, `county`, `serial`. Both pair with
+/// The caption follows the typed county code
+/// ([RepublicOfIrelandAlphabets.countyNames]); the county field holds one or
+/// two letters and the serial one to six digits. Groups `year`, `county`, `serial`. Both pair with
 /// [RepublicOfIrelandThemes.standard].
 ///
 /// [electric] adds the optional green strip at the right edge, from July 2025.
@@ -60,20 +59,12 @@ abstract final class _Layout {
 /// (green under the euroband), the ZZ temporary, diplomatic, trade and historic
 /// plates, and the 1987–2012 `YY-CC-NNNNNN` format.
 abstract final class RepublicOfIrelandPlates {
-  static final PlateSpec standard = standardFor('D');
-  static final PlateSpec electric = electricFor('D');
-
-  static PlateSpec standardFor(String county) => _spec(county, electric: false);
-
-  static PlateSpec electricFor(String county) => _spec(county, electric: true);
+  static final PlateSpec standard = _spec(electric: false);
+  static final PlateSpec electric = _spec(electric: true);
 
   static List<PlateSpec> get all => <PlateSpec>[standard, electric];
 
-  static PlateSpec _spec(String county, {required bool electric}) {
-    final String? caption = RepublicOfIrelandAlphabets.countyNames[county];
-    if (caption == null) {
-      throw ArgumentError.value(county, 'county', 'Not a county code');
-    }
+  static PlateSpec _spec({required bool electric}) {
     // Cell centres, in reading order, squeezed so the number still ends at
     // lastCx: three year digits, the two-letter county field, five serial cells.
     final List<double> raw = <double>[0, _Layout.pitch, 2 * _Layout.pitch];
@@ -113,7 +104,7 @@ abstract final class RepublicOfIrelandPlates {
     final double captionCx = (_Layout.bandEnd + fieldEnd) / 2;
 
     return PlateSpec(
-      id: 'ie.${electric ? 'electric' : 'standard'}.$county',
+      id: 'ie.${electric ? 'electric' : 'standard'}',
       country: RepublicOfIrelandCountry.republic_of_ireland,
       canvasWidth: _Layout.width,
       canvasHeight: _Layout.height,
@@ -132,7 +123,9 @@ abstract final class RepublicOfIrelandPlates {
       rules: <PlateRule>[hyphen((cx[2] + cx[3]) / 2), hyphen((cx[4] + cx[5]) / 2)],
       labels: <PlateLabel>[
         PlateLabel(
-          text: caption,
+          text: RepublicOfIrelandAlphabets.countyNames['D']!,
+          resolve: (String Function(String) group) =>
+              RepublicOfIrelandAlphabets.countyNames[group('county')],
           box: PlateBox(
             captionCx - _Layout.captionWidth / 2,
             _Layout.captionCy - _Layout.captionBox / 2,

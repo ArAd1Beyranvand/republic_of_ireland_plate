@@ -10,7 +10,17 @@ https://platexample.ir/#/discover/republicofireland
 
 # republic_of_ireland_plate
 
-Republic of Ireland's licence plates for [`plate_core`](https://pub.dev/packages/plate_core) — the standard and green-strip electric plates, black on white with the EU band and the Irish county name, and an advisory validator.
+Republic of Ireland's licence plates for the `plate_core` library. The standard and electric plates, black on white with the EU band, and an advisory validator.
+
+## Install
+
+```yaml
+dependencies:
+  plate_core: ^0.12.0
+  republic_of_ireland_plate: ^0.1.0
+```
+
+## Use
 
 ```dart
 import 'package:plate_core/plate_core.dart';
@@ -21,35 +31,33 @@ PlateCanvas(
   theme: RepublicOfIrelandThemes.standard,
   validator: const RepublicOfIrelandValidator(),
   autoValidate: true,
+  onChooseCharacter: noCharacterChooser,
 );
 ```
 
-## Also available
+## Contains
 
-- [`plate_core`](https://pub.dev/packages/plate-core) - Paint license plates.
-- [`plate_alphabet`](https://pub.dev/packages/plate-alphabet) - A library of alphabets for license plates.
-- [`plate_keypad`](https://pub.dev/packages/plate-keypad) - A character picker for license plates.
-- [`plate_number_holder`](https://pub.dev/packages/plate-number-holder) - A frame to hold license plate numbers.
-- [`algeria_plate`](https://pub.dev/packages/algeria-plate) - Algeria's licence plates.
-- [`bolivia_plate`](https://pub.dev/packages/bolivia-plate) - Bolivia's licence plates.
-- [`brunei_plate`](https://pub.dev/packages/brunei-plate) - Brunei's licence plates.
-- [`colombia_plate`](https://pub.dev/packages/colombia-plate) - Colombia's licence plates.
-- [`cuba_plate`](https://pub.dev/packages/cuba-plate) - Cuba's licence plates.
-- [`germany_plate`](https://pub.dev/packages/germany-plate) - Germany's licence plates.
-- [`india_plate`](https://pub.dev/packages/india-plate) - India's licence plates.
-- [`indonesia_plate`](https://pub.dev/packages/indonesia-plate) - Indonesia's licence plates.
-- [`iran_plate`](https://pub.dev/packages/iran-plate) - Iran's licence plates.
-- [`iranshahr_plate`](https://pub.dev/packages/iranshahr-plate) - Iranshahr region's licence plates.
-- [`laos_plate`](https://pub.dev/packages/laos-plate) - Laos's licence plates.
-- [`lebanon_plate`](https://pub.dev/packages/lebanon-plate) - Lebanon's licence plates.
-- [`malaysia_plate`](https://pub.dev/packages/malaysia-plate) - Malaysia's licence plates.
-- [`mali_plate`](https://pub.dev/packages/mali-plate) - Mali's licence plates.
-- [`niger_plate`](https://pub.dev/packages/niger-plate) - Niger's licence plates.
-- [`palestine_plate`](https://pub.dev/packages/palestine-plate) - Palestine's licence plates.
-- [`republic_of_ireland_plate`](https://pub.dev/packages/republic-of-ireland-plate) - Republic of Ireland's licence plates.
-- [`sudan_plate`](https://pub.dev/packages/sudan-plate) - Sudan's licence plates.
-- [`tunisia_plate`](https://pub.dev/packages/tunisia-plate) - Tunisia's licence plates.
-- [`venezuela_plate`](https://pub.dev/packages/venezuela-plate) - Venezuela's licence plates.
-- [`vietnam_plate`](https://pub.dev/packages/vietnam-plate) - Vietnam's licence plates.
-- [`yemen_plate`](https://pub.dev/packages/yemen-plate) - Yemen's licence plates.
-- [`zimbabwe_plate`](https://pub.dev/packages/zimbabwe-plate) - Zimbabwe's licence plates.
+- `RepublicOfIrelandCountry` — country panel: `republic_of_ireland`.
+- `RepublicOfIrelandPlates` — 2 plate specs: `standard`, `electric`.
+- `RepublicOfIrelandThemes` — 1 theme: `standard`.
+- `RepublicOfIrelandValidator` — advisory validator; flags the frame, never blocks a keystroke.
+
+## Plates
+
+The Irish plate, `YYH-CC-NNNNN`, with the Irish-language county name above
+the number and the EU band at the left.
+
+The caption follows the typed county code
+(`RepublicOfIrelandAlphabets.countyNames`); the county field holds one or
+two letters and the serial one to six digits. Groups `year`, `county`, `serial`. Both pair with
+`RepublicOfIrelandThemes.standard`.
+
+`electric` adds the optional green strip at the right edge, from July 2025.
+Not implemented, for lack of a measured reference: the square-plate variant
+(green under the euroband), the ZZ temporary, diplomatic, trade and historic
+plates, and the 1987–2012 `YY-CC-NNNNNN` format.
+
+## Part of plate
+
+Painted by [`plate_core`](https://pub.dev/packages/plate_core); alphabets shared through [`plate_alphabet`](https://pub.dev/packages/plate_alphabet); optional character picker in [`plate_keypad`](https://pub.dev/packages/plate_keypad).
+
