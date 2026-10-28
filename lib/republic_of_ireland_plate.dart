@@ -4,7 +4,8 @@
 /// advisory validator.
 library;
 
-export 'package:plate_alphabet/plate_alphabet.dart' show RepublicOfIrelandAlphabets;
+export 'package:plate_alphabet/plate_alphabet.dart'
+    show RepublicOfIrelandAlphabets;
 
 export 'src/republic_of_ireland_colors.dart';
 export 'src/republic_of_ireland_country.dart';
