@@ -4,6 +4,9 @@
 /// advisory validator.
 library;
 
+// TODO(py): [D5] one module `plates.countries.republic_of_ireland`; assets via importlib.resources.
+// TODO(ts): [D5] one subpath export `./countries/republic_of_ireland`; tree-shakable.
+// TODO(kt): [D5] package `countries.republic_of_ireland` in the countries module.
 export 'package:plate_alphabet/plate_alphabet.dart'
     show RepublicOfIrelandAlphabets;
 
