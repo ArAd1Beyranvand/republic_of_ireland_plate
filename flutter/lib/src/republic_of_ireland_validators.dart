@@ -1,23 +1,14 @@
 import 'package:plate_alphabet/plate_alphabet.dart';
 import 'package:plate_core/plate_core.dart';
 
-// TODO(py): [D4-code] hand-port; reason strings are the contract, keep them byte-identical.
-// TODO(ts): [D4-code] hand-port; reason strings are the contract, keep them byte-identical.
-// TODO(kt): [D4-code] hand-port; reason strings are the contract, keep them byte-identical.
 /// Judges a plate in the form `YYH-CC-NNNNN`: a year and half-year (`131` is
 /// the first half of 2013), a county code from the article's tables, and the
 /// sequence number. Reports, never bars a keystroke.
 ///
 /// The sequence is one to six digits (six on re-registered imports).
 class RepublicOfIrelandValidator extends GatedPlateValidator {
-  const RepublicOfIrelandValidator();
+  const RepublicOfIrelandValidator() : super('serial');
 
-  @override
-  String get gateGroup => 'serial';
-
-  // TODO(py): [H9] Python re: \d/\w match Unicode; keep explicit [0-9]/[A-Z] classes (or re.ASCII).
-  // TODO(ts): [H9] same flavour as Dart; port as is, cover accept/reject in the vectors (D9).
-  // TODO(kt): [H9] Regex engine differs per target (JVM/JS/Native): keep to portable syntax.
   static final RegExp _year = RegExp(r'^\d\d[12]$');
 
   static const String reasonYear =

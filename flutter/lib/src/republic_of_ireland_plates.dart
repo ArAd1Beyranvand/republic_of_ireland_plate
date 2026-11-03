@@ -32,8 +32,7 @@ abstract final class _Layout {
   static const double width = 520, height = 110;
   static const double bandEnd = 46, stripStart = 484.5;
 
-  static const double serialCy = 61.9, serialBox = 96;
-  static const double pitch = 42.5;
+  static const double serialCy = 61.9, serialBox = 96, pitch = 42.5;
   static const double firstCx = 71.4, lastCx = 458.7;
   static const double toHyphen = 33.4, fromHyphen = 33.5, toNumber = 31.4;
 
@@ -150,9 +149,9 @@ abstract final class RepublicOfIrelandPlates {
           text: RepublicOfIrelandAlphabets.countyNames['D']!,
           resolve: (String Function(String) group) =>
               RepublicOfIrelandAlphabets.countyNames[group('county')],
-          box: PlateBox(
-            captionCx - _Layout.captionWidth / 2,
-            _Layout.captionCy - _Layout.captionBox / 2,
+          box: PlateBox.centered(
+            captionCx,
+            _Layout.captionCy,
             _Layout.captionWidth,
             _Layout.captionBox,
           ),
@@ -170,11 +169,7 @@ abstract final class RepublicOfIrelandPlates {
           color: RepublicOfIrelandColors.white,
         ),
       ],
-      textGroups: const <PlateTextGroup>[
-        PlateTextGroup(<int>[0], key: 'year'),
-        PlateTextGroup(<int>[1], key: 'county'),
-        PlateTextGroup(<int>[2], key: 'serial'),
-      ],
+      textGroups: PlateTextGroup.perSlot(<String>['year', 'county', 'serial']),
     );
   }
 }

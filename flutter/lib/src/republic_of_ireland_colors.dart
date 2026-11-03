@@ -8,5 +8,4 @@ abstract final class RepublicOfIrelandColors {
   static const Color white = Color(0xFFFFFFFF);
   static const Color black = Color(0xFF000000);
   static const Color green = Color(0xFF00B74F);
-  static const Color inactive = Color(0xFFB0B0B0);
 }

@@ -8,7 +8,6 @@ abstract final class RepublicOfIrelandThemes {
   static final PlateTheme standard = PlateTheme.monochrome(
     field: RepublicOfIrelandColors.white,
     ink: RepublicOfIrelandColors.black,
-    inactive: RepublicOfIrelandColors.inactive,
     borderWidthRatio: 0.043,
     plateRadiusRatio: 0.09,
   );
